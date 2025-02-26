@@ -29,8 +29,6 @@ class LoginForm : AppCompatActivity() {
 
          loginUser(strEmail, strPassword)
       }
-
-
    }
 
    private fun loginUser(strEmail: String, strPassword: String) {
