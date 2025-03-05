@@ -16,7 +16,7 @@ class SplashScreenActivity : AppCompatActivity() {
       },1000)*/
 
       Handler().postDelayed(Runnable {
-         startActivity(Intent(this, IntentsActivity::class.java))
+         startActivity(Intent(this, MenusActivity::class.java))
       }, 1000)
    }
 }

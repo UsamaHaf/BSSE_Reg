@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/deleteMenu"
+        android:icon="@drawable/ic_whatsapp"
+        android:title="Delete" />
+
+    <item
+        android:id="@+id/editMenu"
+        android:title="Edit" />
+
+    <item
+        android:id="@+id/archiveMenu"
+        android:title="Archive Chats" />
+
+    <item
+        android:id="@+id/adminMenu"
+        android:title=" Make Admin" />
+
+</menu>
