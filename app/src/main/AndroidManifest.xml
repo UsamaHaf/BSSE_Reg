@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
@@ -21,24 +20,26 @@
         android:theme="@style/Theme.BSSE_Reg"
         tools:targetApi="31">
         <activity
-            android:name=".IntentsActivity"
+            android:name=".MenusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity
+            android:name=".IntentsActivity"
+            android:exported="true"></activity>
         <activity
             android:name=".LoginForm"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".SignUpForm"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />

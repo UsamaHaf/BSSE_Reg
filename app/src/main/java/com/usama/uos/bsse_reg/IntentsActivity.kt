@@ -5,8 +5,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.telephony.SmsManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -21,6 +23,8 @@ class IntentsActivity : AppCompatActivity() {
    lateinit var btnGoogleSearch: Button
    lateinit var btnMakeCall: Button
    lateinit var btnSendSMS: Button
+   lateinit var edtPhoneSMSNo: EditText
+   lateinit var edtSMSMessage: EditText
 
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
@@ -33,12 +37,24 @@ class IntentsActivity : AppCompatActivity() {
       btnMakeCall = findViewById(R.id.btnMakeCall)
       edtPhoneNo = findViewById(R.id.edtPhoneNo)
       btnSendSMS = findViewById(R.id.btnSendSMS)
+      edtSMSMessage = findViewById(R.id.edtSMSMessage)
+      edtPhoneSMSNo = findViewById(R.id.edtPhoneSMSNo)
 
       btnSendSMS.setOnClickListener {
          if(ContextCompat.checkSelfPermission(this , android.Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this , arrayOf(android.Manifest.permission.SEND_SMS) , 100)
          }else{
-            //val sendPI = PendingIntent
+
+            val strPhone = edtPhoneSMSNo.text.toString()
+            val strMessage = edtSMSMessage.text.toString()
+
+            sendMessage(strPhone , strMessage)
+
+            Toast.makeText(this , "Message Sent..." , Toast.LENGTH_SHORT).show()
+
+            edtSMSMessage.text.equals("")
+            edtPhoneSMSNo.text.equals("")
+
          }
       }
 
@@ -71,5 +87,10 @@ class IntentsActivity : AppCompatActivity() {
       }
 
 
+   }
+
+   private fun sendMessage(strPhone: String, strMessage: String) {
+      val sendPI: PendingIntent = PendingIntent.getBroadcast(this , 0 ,Intent("SMS_SENT") , PendingIntent.FLAG_IMMUTABLE)
+      SmsManager.getDefault().sendTextMessage(strPhone , null , strMessage , sendPI , null)
    }
 }
