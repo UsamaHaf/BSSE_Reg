@@ -25,8 +25,11 @@ class RecyclerViewActivity : AppCompatActivity(), Gmail_Interface {
       rvGMail = findViewById(R.id.rvMainRecyclerview)
       gmailArrayList = ArrayList()
 
-      for (i in userDP.indices) {
 
+      //for(i , i<10 , i++)
+      //for(i , i<userDP.size , i++)
+
+      for (i in userDP.indices) {
          val gmailModel = GmailModel(userDP[i], userName[i])
          gmailArrayList.add(gmailModel)
       }
@@ -36,15 +39,21 @@ class RecyclerViewActivity : AppCompatActivity(), Gmail_Interface {
              GmailAdapter(gmailArrayList, this@RecyclerViewActivity, this@RecyclerViewActivity)
          rvGMail.adapter = adapterGmail
 
+      } else {
+         Toast.makeText(this@RecyclerViewActivity, "No Data", Toast.LENGTH_SHORT).show()
       }
 
 
    }
 
+
    override fun gmailItemClickListener(view: View?, gmailModel: GmailModel, position: Int) {
       Toast.makeText(this, gmailModel.txtUserName, Toast.LENGTH_SHORT).show()
 
-      startActivity(Intent(this@RecyclerViewActivity, MenusActivity::class.java))
+      val intent = Intent(this@RecyclerViewActivity, HomePageActivity::class.java)
+      intent.putExtra("TestData", gmailModel.txtUserName)
+      //intent.putExtra("TestData",  "Testing Data From User")
+      startActivity(intent)
 
    }
 }

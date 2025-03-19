@@ -21,6 +21,7 @@ class GmailAdapter(var gmailArrayList: ArrayList<GmailModel>, activity: Context?
    inner class GmailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
       var userName: TextView = itemView.findViewById(R.id.txtUserName)
       var userDP: ImageView = itemView.findViewById(R.id.userDP)
+
       var mainGmailItemsLayout: RelativeLayout = itemView.findViewById(R.id.mainGmailItemsLayout)
    }
 
