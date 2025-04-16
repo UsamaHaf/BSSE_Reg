@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.usama.uos.bsse_reg.Adapter.GAdapter
 import com.usama.uos.bsse_reg.Adapter.GmailAdapter
 import com.usama.uos.bsse_reg.Interface.Gmail_Interface
 import com.usama.uos.bsse_reg.Models.GmailModel
@@ -15,7 +16,7 @@ class RecyclerViewActivity : AppCompatActivity(), Gmail_Interface {
    private lateinit var rvGMail: RecyclerView
    lateinit var gmailArrayList: ArrayList<GmailModel>
 
-   var userName = arrayOf("CR BSSE", "Hafeez", "BSSE 4th Regular")
+   var userName = arrayOf("CR BSSE", "Sheryar", "BSSE 4th Regular")
    var userDP = arrayOf(R.drawable.whatsapp, R.drawable.ic_background1, R.drawable.ic_chats)
 
    override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,8 +36,8 @@ class RecyclerViewActivity : AppCompatActivity(), Gmail_Interface {
       }
 
       if (gmailArrayList != null) {
-         val adapterGmail =
-             GmailAdapter(gmailArrayList, this@RecyclerViewActivity, this@RecyclerViewActivity)
+         val adapterGmail = GAdapter(gmailArrayList , this@RecyclerViewActivity)
+
          rvGMail.adapter = adapterGmail
 
       } else {
