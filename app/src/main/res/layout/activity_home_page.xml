@@ -5,6 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".HomePageActivity">
 
     <TextView
@@ -15,6 +18,18 @@
         android:gravity="center"
         android:text="Welcome"
         android:textColor="@color/black"
+        android:textSize="26sp" />
+
+    <Button
+        android:id="@+id/btnLogoutUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:text="Logout"
+        android:textColor="@color/black"
         android:textSize="20sp" />
+
 
 </LinearLayout>
