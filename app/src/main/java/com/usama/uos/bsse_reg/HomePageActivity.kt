@@ -2,16 +2,23 @@ package com.usama.uos.bsse_reg
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import com.google.android.material.navigation.NavigationView
+import com.usama.uos.bsse_reg.Fragments.AboutUsFragment
+import com.usama.uos.bsse_reg.Fragments.UserProfileFragment
 import com.usama.uos.bsse_reg.SharedPref.MySharedPreferences
 
 class HomePageActivity : AppCompatActivity() {
 
-   lateinit var  txtWelcomeText:TextView
-   lateinit var  btnLogoutUser:Button
+   lateinit var mainDrawerLayout: DrawerLayout
+   lateinit var btnOpenSideMenu: ImageView
+   lateinit var navigationDrawer: NavigationView
    lateinit var sharedPreferences: MySharedPreferences
 
    override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,31 +26,73 @@ class HomePageActivity : AppCompatActivity() {
       setContentView(R.layout.activity_home_page)
 
       sharedPreferences = MySharedPreferences(this@HomePageActivity)
+      //setFragment(UserProfileFragment() , "")
 
-      txtWelcomeText = findViewById(R.id.txtWelcomeText)
-      btnLogoutUser = findViewById(R.id.btnLogoutUser)
-      txtWelcomeText.text =   "Welcome Mr. ${sharedPreferences.getEmail("UserEmail")}"
 
-      btnLogoutUser.setOnClickListener {
+      navigationDrawer = findViewById(R.id.navigationDrawer)
+      mainDrawerLayout = findViewById(R.id.mainDrawerLayout)
+      btnOpenSideMenu = findViewById(R.id.btnOpenSideMenu)
 
-         sharedPreferences.saveIsLogInStatus("UserLoginStatus" , "False")
-         startActivity(Intent(this@HomePageActivity , LoginForm::class.java))
+      mainDrawerLayout.closeDrawer(GravityCompat.START)
 
-         Toast.makeText(this , "Logout Successfully" , Toast.LENGTH_SHORT).show()
+      btnOpenSideMenu.setOnClickListener {
+         mainDrawerLayout.openDrawer(GravityCompat.START)
       }
 
+      val toggle =
+          ActionBarDrawerToggle(this@HomePageActivity, mainDrawerLayout, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+      mainDrawerLayout.addDrawerListener(toggle)
+      toggle.syncState()
 
-      //val receivedData = intent.getStringExtra("TestData")
+      navigationDrawer.setNavigationItemSelectedListener { menuItems ->
+         when (menuItems.itemId) {
+            R.id.userProfile -> {
 
-     /* if(receivedData!= null){
+               setFragment(UserProfileFragment() , "")
 
-      }else{
+            }
 
-         txtWelcomeText.text =   "No Data Recieved"
+            R.id.aboutUs -> {
+               setFragment(AboutUsFragment() , "")
+            }
 
-      }*/
+            R.id.logoutUser -> {
+               sharedPreferences.saveIsLogInStatus("UserLoginStatus" , "False")
+               startActivity(Intent(this@HomePageActivity , LoginForm::class.java))
+               Toast.makeText(this , "Logout Successfully" , Toast.LENGTH_SHORT).show()
+            }
+         }
+         true
+      }
 
+   }
+
+   fun setFragment(fragment: Fragment?, title: String) {
+      this@HomePageActivity.supportFragmentManager.beginTransaction()
+         .replace(R.id.fragmentContainer, fragment!!).addToBackStack(null).commit()
+
+      mainDrawerLayout.closeDrawer(GravityCompat.START)
 
 
    }
+
+
+   /*
+
+   txtWelcomeText = findViewById(R.id.txtWelcomeText)
+   btnLogoutUser = findViewById(R.id.btnLogoutUser)
+   txtWelcomeText.text =   "Welcome Mr. ${sharedPreferences.getEmail("UserEmail")}"
+
+   btnLogoutUser.setOnClickListener {
+      sharedPreferences.saveIsLogInStatus("UserLoginStatus" , "False")
+      startActivity(Intent(this@HomePageActivity , LoginForm::class.java))
+      Toast.makeText(this , "Logout Successfully" , Toast.LENGTH_SHORT).show()
+   }*//*
+     val receivedData = intent.getStringExtra("TestData")
+     if(receivedData!= null){
+      }else{
+         txtWelcomeText.text =   "No Data Recieved"
+      }*/
+
+
 }
