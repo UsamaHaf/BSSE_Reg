@@ -30,6 +30,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="8dp"
-        android:text="Nav_header_subtitle"
+        android:text="Email Address"
         android:textColor="@color/white" />
 </LinearLayout>
