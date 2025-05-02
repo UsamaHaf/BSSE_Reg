@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1041578977038",
+    "firebase_url": "https://bsse-reg-453a3-default-rtdb.firebaseio.com",
+    "project_id": "bsse-reg-453a3",
+    "storage_bucket": "bsse-reg-453a3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041578977038:android:436101ff854a984268d95f",
+        "android_client_info": {
+          "package_name": "com.usama.uos.bsse_reg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuzkO1Rt4cy8wQKLjof70vVjD9BEVx3ek"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
