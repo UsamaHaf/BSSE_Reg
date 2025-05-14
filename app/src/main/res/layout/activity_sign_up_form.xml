@@ -67,6 +67,17 @@
     </LinearLayout>
 
     <EditText
+        android:id="@+id/edtPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@drawable/ic_edt_background"
+        android:hint="Enter Phone Number"
+        android:inputType="number"
+        android:padding="6dp"
+        android:textColorHint="@color/white" />
+
+    <EditText
         android:id="@+id/edtPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -76,6 +87,8 @@
         android:inputType="numberPassword"
         android:padding="6dp"
         android:textColorHint="@color/white" />
+
+
 
     <!--<RadioGroup
         android:layout_width="match_parent"
@@ -93,6 +106,13 @@
             android:layout_height="wrap_content"
             android:text="Female" />
     </RadioGroup>-->
+
+    <ProgressBar
+        android:visibility="invisible"
+        android:id="@+id/pbSIgnUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_margin="16dp"

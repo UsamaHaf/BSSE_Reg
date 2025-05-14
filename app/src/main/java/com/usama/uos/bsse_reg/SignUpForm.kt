@@ -5,13 +5,17 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.usama.uos.bsse_reg.Models.UserModel
 
 class SignUpForm : AppCompatActivity() {
 
    private lateinit var firebaseAuth: FirebaseAuth
+   private lateinit var pbSIgnUp:ProgressBar
 
    override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -21,11 +25,13 @@ class SignUpForm : AppCompatActivity() {
       firebaseAuth = FirebaseAuth.getInstance()
 
 
+      pbSIgnUp = findViewById(R.id.pbSIgnUp)
       val btnSignUpForm = findViewById<Button>(R.id.btnSignup)
       val edtEmail = findViewById<EditText>(R.id.edtEmailAddress)
       val edtFirstName = findViewById<EditText>(R.id.edtFirstName)
       val edtLastName = findViewById<EditText>(R.id.edtLastName)
       val edtPassword = findViewById<EditText>(R.id.edtPassword)
+      val edtPhoneNumber = findViewById<EditText>(R.id.edtPhoneNumber)
 
       btnSignUpForm.setOnClickListener {
 
@@ -44,13 +50,12 @@ class SignUpForm : AppCompatActivity() {
          } else {
             val strEmail = edtEmail.text.toString()
             val strPassword = edtPassword.text.toString()
+            val strPhoneNumber = edtPhoneNumber.text.toString()
+            val strFName = edtFirstName.text.toString()
+            val strLName = edtLastName.text.toString()
 
-
-            signUpFirebaseUser(edtEmail.text.toString(), edtPassword.text.toString())
-            Log.e("UserEmail" , edtEmail.text.toString())
-            Log.e("UserPassword" , edtPassword.text.toString())
-
-
+            signUpFirebaseUser(strEmail, strPassword , strPhoneNumber , strFName , strLName)
+            pbSIgnUp.visibility = ProgressBar.VISIBLE
 
 
          }
@@ -59,19 +64,50 @@ class SignUpForm : AppCompatActivity() {
    }
 
 
-   private fun signUpFirebaseUser(strEmail: String, strPassword: String) {
-
+   private fun signUpFirebaseUser(strEmail: String, strPassword: String, strPhoneNumber: String, strFName: String, strLName: String) {
       firebaseAuth.createUserWithEmailAndPassword(strEmail, strPassword).addOnCompleteListener { task ->
 
          if (task.isSuccessful) {
-            Toast.makeText(this@SignUpForm, "SignIn Successfully", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this@SignUpForm, LoginForm::class.java))
+            pbSIgnUp.visibility = ProgressBar.GONE
+
+            try {
+
+               val userModel = UserModel()
+               userModel.userEmail = strEmail
+               userModel.userFirstName = strFName
+               userModel.userLastName = strLName
+               userModel.userPhoneNumber = strPhoneNumber
+               userModel.userPassword = strPassword
+               userModel.userUID = firebaseAuth.currentUser?.uid
+
+               FirebaseDatabase.getInstance().getReference("Users")
+                  .child(firebaseAuth.currentUser!!.uid).setValue(userModel)
+                  .addOnCompleteListener { userTask->
+
+                     if(userTask.isSuccessful){
+                        Toast.makeText(this@SignUpForm, "SignUp Successfully", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this@SignUpForm, LoginForm::class.java))
+                     }else{
+                        Toast.makeText(this@SignUpForm, "SignIn Failed: ${userTask.exception}", Toast.LENGTH_SHORT).show()
+                     }
+
+                  }
+
+
+
+
+
+            }catch (e:Exception){
+               Log.e("SignUpException" , "$e")
+            }
+
+
+
          }else{
 
             Toast.makeText(this@SignUpForm, "SignIn Failed:- ${task.exception}", Toast.LENGTH_SHORT).show()
-
+            pbSIgnUp.visibility = ProgressBar.GONE
             Log.e("FailedFirebase" , task.exception.toString())
-
             startActivity(Intent(this@SignUpForm, LoginForm::class.java))
          }
 

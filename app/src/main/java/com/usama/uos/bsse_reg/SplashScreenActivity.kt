@@ -18,13 +18,20 @@ class SplashScreenActivity : AppCompatActivity() {
       super.onCreate(savedInstanceState)
       setContentView(R.layout.activity_splash_screen)
 
-      firebaseAuth = FirebaseAuth.getInstance()
       FirebaseApp.initializeApp(this@SplashScreenActivity)
+      firebaseAuth = FirebaseAuth.getInstance()
+
 
       sharedPreferences = MySharedPreferences(this@SplashScreenActivity)
 
       Handler(Looper.getMainLooper()).postDelayed(Runnable {
-         startActivity(Intent(this, SignUpForm::class.java))
+         if(firebaseAuth.currentUser !=null){
+            startActivity(Intent(this, HomePageActivity::class.java))
+         }else{
+            startActivity(Intent(this, LoginForm::class.java))
+         }
+
+
       },1000)
 
       /*Handler().postDelayed(Runnable {

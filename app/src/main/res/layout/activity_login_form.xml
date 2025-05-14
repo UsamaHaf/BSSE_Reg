@@ -41,6 +41,13 @@
             android:layout_below="@id/loginEmail"
             android:hint="Password" />
 
+        <ProgressBar
+            android:id="@+id/progressBarLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible" />
+
 
     </LinearLayout>
 
@@ -51,6 +58,14 @@
         android:layout_below="@id/mainLayout"
         android:layout_marginBottom="30dp"
         android:text="Login" />
+
+    <Button
+        android:id="@+id/createNewAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnLogin"
+        android:layout_marginBottom="30dp"
+        android:text="Create New Account!!" />
 
 
 </RelativeLayout>
