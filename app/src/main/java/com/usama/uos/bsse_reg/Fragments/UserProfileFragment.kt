@@ -15,13 +15,15 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.gson.Gson
 import com.usama.uos.bsse_reg.Adapter.UsersAdapter
+import com.usama.uos.bsse_reg.Interface.UserItemClick
 import com.usama.uos.bsse_reg.Models.UserModel
 import com.usama.uos.bsse_reg.R
 import com.usama.uos.bsse_reg.SharedPref.MySharedPreferences
 
 
-class UserProfileFragment : Fragment() {
+class UserProfileFragment : Fragment(), UserItemClick {
 
    private lateinit var sharedPreferences: MySharedPreferences
    lateinit var txtNoDataYet: TextView
@@ -66,15 +68,15 @@ class UserProfileFragment : Fragment() {
                   userDataArrayList.add(modelUser!!)
                }
 
-               if(userDataArrayList == null || userDataArrayList.size == 0){
+               if (userDataArrayList == null || userDataArrayList.size == 0) {
                   pbUsers.visibility = ProgressBar.GONE
                   txtNoDataYet.visibility = TextView.VISIBLE
-               }else{
-                  usersAdapter = UsersAdapter(userDataArrayList , requireActivity())
+               } else {
+                  usersAdapter =
+                      UsersAdapter(userDataArrayList, requireActivity(), this@UserProfileFragment)
                   rvUsers.adapter = usersAdapter
                   pbUsers.visibility = ProgressBar.GONE
                }
-
 
 
             } catch (e: Exception) {
@@ -91,6 +93,21 @@ class UserProfileFragment : Fragment() {
       })
 
 
+   }
+
+   override fun userItemClickListener(view: View?, userModel: UserModel, position: Int) {
+      val bundle = Bundle()
+      bundle.putString("UserDetails", Gson().toJson(userModel))
+      val nextFragment = AboutUsFragment()
+      nextFragment.arguments = bundle
+      setFragment(nextFragment, "")
+
+
+   }
+
+   private fun setFragment(fragment: Fragment?, title: String) {
+      requireActivity().supportFragmentManager.beginTransaction()
+         .replace(R.id.fragmentContainer, fragment!!).addToBackStack(null).commit()
    }
 
 

@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.usama.uos.bsse_reg.Interface.UserItemClick
 import com.usama.uos.bsse_reg.Models.UserModel
 import com.usama.uos.bsse_reg.R
 
-class UsersAdapter(var userDataArrayList: ArrayList<UserModel>, context: Context) :
+class UsersAdapter(var userDataArrayList: ArrayList<UserModel>, context: Context, var userItemClick: UserItemClick) :
    RecyclerView.Adapter<UsersAdapter.MyUserViewHolder>() {
 
    val inflator: LayoutInflater = LayoutInflater.from(context)
@@ -34,6 +35,11 @@ class UsersAdapter(var userDataArrayList: ArrayList<UserModel>, context: Context
       val model = userDataArrayList[position]
       holder.txtUserName.text = model.userFirstName + model.userLastName
       holder.txtUserEmail.text = model.userEmail
+
+      holder.txtUserName.setOnClickListener { view ->
+         userItemClick.userItemClickListener(view, model, position)
+
+      }
    }
 
 }

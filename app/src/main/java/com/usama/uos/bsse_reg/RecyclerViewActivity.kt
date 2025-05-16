@@ -53,7 +53,6 @@ class RecyclerViewActivity : AppCompatActivity(), Gmail_Interface {
 
       val intent = Intent(this@RecyclerViewActivity, HomePageActivity::class.java)
       intent.putExtra("TestData", gmailModel.txtUserName)
-      //intent.putExtra("TestData",  "Testing Data From User")
       startActivity(intent)
 
    }
