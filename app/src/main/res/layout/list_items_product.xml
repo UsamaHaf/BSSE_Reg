@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/messProductImage"
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:padding="8dp"
+                android:src="@drawable/inventory_bg" />
+
+            <TextView
+                android:id="@+id/txtItemRetailPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dp"
+                android:text="PKR 120"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/txtProductName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dp"
+                android:paddingBottom="3dp"
+
+                android:text="Chicken Tikka"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:id="@+id/addToCartLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/btnAddToCart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/add_to_cart_bg"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_plus"
+                        android:text="Add To Cart"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:tint="@color/white"
+                        android:visibility="visible" />
+
+
+                    <LinearLayout
+                        android:id="@+id/btnAdditionLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/add_to_cart_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="4dp"
+                        android:visibility="gone">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/btnMinusDelete"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_weight="1"
+                            android:padding="1dp"
+                            android:src="@drawable/ic_delete_icon"
+                            android:tint="@color/white" />
+
+                        <EditText
+                            android:id="@+id/txtItemQuantity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:hint="0"
+                            android:imeOptions="actionDone"
+                            android:inputType="number"
+                            android:padding="1dp"
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/white"
+                            android:textSize="11dp" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/btnPlus"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_weight="1"
+                            android:padding="1dp"
+                            android:src="@drawable/ic_plus"
+                            android:tint="@color/white" />
+                    </LinearLayout>
+
+                </FrameLayout>
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/txtOutOfStock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_out_stock"
+                    android:visibility="gone" />
+
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
+
