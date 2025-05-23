@@ -98,7 +98,7 @@ class UserProfileFragment : Fragment(), UserItemClick {
    override fun userItemClickListener(view: View?, userModel: UserModel, position: Int) {
       val bundle = Bundle()
       bundle.putString("UserDetails", Gson().toJson(userModel))
-      val nextFragment = AboutUsFragment()
+      val nextFragment = UpdateUserFragment()
       nextFragment.arguments = bundle
       setFragment(nextFragment, "")
 

@@ -1,5 +1,6 @@
 package com.usama.uos.bsse_reg
 
+import AddProductsFragment
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -13,7 +14,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.usama.uos.bsse_reg.Fragments.AboutUsFragment
 import com.usama.uos.bsse_reg.Fragments.UserProfileFragment
 import com.usama.uos.bsse_reg.SharedPref.MySharedPreferences
 
@@ -45,6 +45,7 @@ class HomePageActivity : AppCompatActivity() {
       }
       setFragment(UserProfileFragment() , "User Profile")
 
+      //Dynamic Data setting on Navigation Drawer Header
       val headerView: View  = navigationDrawer.getHeaderView(0)
       val userEmail = headerView.findViewById<TextView>(R.id.txtAccEmail)
       userEmail.text =  firebaseAuth.currentUser?.email
@@ -62,7 +63,7 @@ class HomePageActivity : AppCompatActivity() {
             }
 
             R.id.aboutUs -> {
-               setFragment(AboutUsFragment() , "About Us")
+               setFragment(AddProductsFragment() , "Add Product")
             }
 
             R.id.logoutUser -> {
